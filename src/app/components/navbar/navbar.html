@@ -1,0 +1,71 @@
+<nav class="bg-white shadow-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <!-- Brand -->
+      <div class="flex items-center">
+        <a routerLink="/" class="flex items-center space-x-3">
+          <span class="inline-block w-8 h-8 bg-gradient-to-tr from-indigo-500 to-indigo-300 rounded-md shadow-sm"></span>
+          <span class="text-lg font-semibold text-gray-800">Ecommerce Store</span>
+        </a>
+      </div>
+
+      <!-- Desktop links -->
+      <div class="hidden md:flex md:items-center md:space-x-4">
+        <a routerLink="/" routerLinkActive="text-indigo-600 font-semibold" [routerLinkActiveOptions]="{ exact: true }"
+           class="px-3 py-2 rounded-md text-sm text-gray-700 hover:text-indigo-600 transition">
+          Home
+        </a>
+
+        <a routerLink="/about" routerLinkActive="text-indigo-600 font-semibold"
+           class="px-3 py-2 rounded-md text-sm text-gray-700 hover:text-indigo-600 transition">
+          About
+        </a>
+
+        <a routerLink="/contact" routerLinkActive="text-indigo-600 font-semibold"
+           class="px-3 py-2 rounded-md text-sm text-gray-700 hover:text-indigo-600 transition">
+          Contact Us
+        </a>
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden">
+        <button
+          (click)="toggle()"
+          aria-controls="mobile-menu"
+          [attr.aria-expanded]="open"
+          class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        >
+          <span class="sr-only">Open main menu</span>
+          <!-- icon: lines when closed, X when open -->
+          <svg *ngIf="!open" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+          <svg *ngIf="open" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" *ngIf="open" class="md:hidden border-t border-gray-100">
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+      <a routerLink="/" routerLinkActive="bg-indigo-50 text-indigo-600 font-semibold" [routerLinkActiveOptions]="{ exact: true }"
+         (click)="close()" class="block px-3 py-2 rounded-md text-base text-gray-700 hover:bg-gray-50">
+        Home
+      </a>
+      <a routerLink="/about" routerLinkActive="bg-indigo-50 text-indigo-600 font-semibold"
+         (click)="close()" class="block px-3 py-2 rounded-md text-base text-gray-700 hover:bg-gray-50">
+        About
+      </a>
+      <a routerLink="/contact" routerLinkActive="bg-indigo-50 text-indigo-600 font-semibold"
+         (click)="close()" class="block px-3 py-2 rounded-md text-base text-gray-700 hover:bg-gray-50">
+        Contact Us
+      </a>
+    </div>
+  </div>
+</nav>
+
