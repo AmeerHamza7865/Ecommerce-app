@@ -1,0 +1,179 @@
+<!-- <div class="max-w-lg mx-auto mt-10 bg-white p-6 rounded-2xl shadow-md">
+  <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Add New Product</h2>
+
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="space-y-4">
+    
+
+    <div>
+      <label class="block text-gray-700 font-medium mb-2">Product Name</label>
+      <input
+        formControlName="name"
+        type="text"
+        placeholder="Enter product name"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none"
+      />
+      <div *ngIf="productForm.get('name')?.touched && productForm.get('name')?.invalid" class="text-red-500 text-sm mt-1">
+        Product name is required (min 2 chars)
+      </div>
+    </div>
+    <div>
+      <label class="block text-gray-700 font-medium mb-2">Description</label>
+     
+
+      <textarea formControlName="description" placeholder="Enter product Description" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none"></textarea>
+     
+    </div>
+
+
+    <div>
+      <label class="block text-gray-700 font-medium mb-2">Category</label>
+      <select
+        formControlName="category"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none"
+      >
+        <option value="">Select category</option>
+        @for(item of productCategories();track $index){
+
+            <option value="{{item.id}}">{{item.name}}</option>
+        }
+       
+      </select>
+      <div *ngIf="productForm.get('category')?.touched && productForm.get('category')?.invalid" class="text-red-500 text-sm mt-1">
+        Category is required
+      </div>
+    </div>
+
+
+    <div>
+      <label class="block text-gray-700 font-medium mb-2">Stock Quantity</label>
+      <input
+        formControlName="stock"
+        type="number"
+        placeholder="Enter stock"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none"
+      />
+      <div *ngIf="productForm.get('stock')?.touched && productForm.get('stock')?.invalid" class="text-red-500 text-sm mt-1">
+        Stock must be 0 or higher
+      </div>
+    </div>
+
+ 
+    <div>
+      <label class="block text-gray-700 font-medium mb-2">Price ($)</label>
+      <input
+        formControlName="price"
+        type="number"
+        placeholder="Enter price"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none"
+      />
+      <div *ngIf="productForm.get('price')?.touched && productForm.get('price')?.invalid" class="text-red-500 text-sm mt-1">
+        Price must be greater than 0
+      </div>
+    </div>
+
+ 
+    <button
+      type="submit"
+      class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+    >
+      Add Product
+    </button>
+  </form>
+</div>
+ -->
+
+
+
+ <div class="max-w-lg mx-auto mt-10 bg-white p-6 rounded-2xl shadow-md">
+  <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Add New Product</h2>
+
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="space-y-4">
+
+    <!-- Product Name -->
+    <div>
+      <label class="block text-gray-700 font-medium mb-2">Product Name</label>
+      <input
+        formControlName="name"
+        type="text"
+        placeholder="Enter product name"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none"
+      />
+      <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched"
+           class="text-red-500 text-sm mt-1">
+        Product name is required (min 2 chars)
+      </div>
+    </div>
+
+    <!-- Category -->
+    <div>
+      <label class="block text-gray-700 font-medium mb-2">Category</label>
+      <select
+        formControlName="category"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none"
+      >
+        <option value="">Select category</option>
+        @for(item of productCategories(); track item.id) {
+          <option [value]="item.id">{{ item.name }}</option>
+        }
+      </select>
+      <div *ngIf="productForm.get('category')?.invalid && productForm.get('category')?.touched"
+           class="text-red-500 text-sm mt-1">
+        Category is required
+      </div>
+    </div>
+
+    <!-- Stock -->
+    <div>
+      <label class="block text-gray-700 font-medium mb-2">Stock Quantity</label>
+      <input
+        formControlName="stock"
+        type="number"
+        placeholder="Enter stock"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none"
+      />
+      <div *ngIf="productForm.get('stock')?.invalid && productForm.get('stock')?.touched"
+           class="text-red-500 text-sm mt-1">
+        Stock must be 0 or higher
+      </div>
+    </div>
+
+    <!-- Price -->
+    <div>
+      <label class="block text-gray-700 font-medium mb-2">Price ($)</label>
+      <input
+        formControlName="price"
+        type="number"
+        placeholder="Enter price"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none"
+      />
+      <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched"
+           class="text-red-500 text-sm mt-1">
+        Price must be greater than 0
+      </div>
+    </div>
+
+    <!-- Image -->
+    <div>
+      <label class="block text-gray-700 font-medium mb-2">Image URL</label>
+      <input
+        formControlName="imgUrl"
+        type="text"
+        placeholder="Enter image URL"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none"
+      />
+      <div *ngIf="productForm.get('imgUrl')?.invalid && productForm.get('imgUrl')?.touched"
+           class="text-red-500 text-sm mt-1">
+        Image URL is required
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <button
+      type="submit"
+      [disabled]="productForm.invalid"
+      class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+    >
+      Add Product
+    </button>
+  </form>
+</div>

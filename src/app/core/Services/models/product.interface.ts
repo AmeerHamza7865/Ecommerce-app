@@ -1,12 +1,12 @@
 export interface ProductModel{
 
-  id: number;
+  // id: number;
   name: string;
   categoryName: string;
   description: string;
   price: number;
   sku: string;
   stock: number;
-  imageUrls: string[];
+  imageUrls: string;
 
 }
