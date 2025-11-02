@@ -1,5 +1,4 @@
-export interface ProductModel{
-
+export interface ProductModel {
   id: number;
   name: string;
   categoryName: string;
@@ -7,6 +6,6 @@ export interface ProductModel{
   price: number;
   sku: string;
   stock: number;
-  imageUrls: string[];
-
+  imageUrls?: string[];  // 👈 optional
+  imageUrl: string;
 }
