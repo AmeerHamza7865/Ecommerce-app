@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { ProductModel } from '../../core/Services/models/product.interface';
 import { ProductService } from '../../core/Services/product-service';
 import { categoryModel } from '../../core/Services/models/Category.interface';
+import addProduct from '../../core/Services/models/addProduct.interface';
 
 
 @Component({
@@ -17,10 +18,12 @@ export class AddProduct {
     productForm!: FormGroup;
     productCategories = signal<categoryModel[]>([]);
 
+
   constructor(private fb: FormBuilder) {
     // ✅ Initialize the reactive form properly
        this.productForm = this.fb.nonNullable.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
+      sku: ['', [Validators.required, Validators.minLength(2)]],
       description: [''],
       category: ['', Validators.required],
       stock: [0, [Validators.required, Validators.min(0)]],
@@ -31,9 +34,17 @@ export class AddProduct {
 
   onSubmit(){
     if(this.productForm.valid){
-      const newProduct: ProductModel = this.productForm.value;
+      const newProduct: addProduct = this.productForm.value;
       console.log('✅ Product added:', newProduct);
-      alert('Product added successfully!');
+      this.productService.addProduct(newProduct).subscribe({
+        next: (response) => {
+          console.log('✅ Product added successfully:', response);
+        },
+        error: (error) => {
+          console.error('❌ Error adding product:', error);
+        }
+      })
+      // alert('Product added successfully!');
       this.productForm.reset();
     }
     else{
