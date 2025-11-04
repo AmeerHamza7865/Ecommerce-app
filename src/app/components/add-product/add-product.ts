@@ -21,22 +21,45 @@ export class AddProduct {
 
   constructor(private fb: FormBuilder) {
     // ✅ Initialize the reactive form properly
-       this.productForm = this.fb.nonNullable.group({
+    //    this.productForm = this.fb.nonNullable.group({
+    //   name: ['', [Validators.required, Validators.minLength(2)]],
+    //   sku: ['', [Validators.required, Validators.minLength(2)]],
+    //   description: [''],
+    //   category: ['', Validators.required],
+    //   stock: [0, [Validators.required, Validators.min(0)]],
+    //   price: [0, [Validators.required, Validators.min(1)]],
+    //   imgUrl: ['', [Validators.required, Validators.minLength(2)]],
+    // });
+
+    this.productForm = this.fb.nonNullable.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       sku: ['', [Validators.required, Validators.minLength(2)]],
       description: [''],
-      category: ['', Validators.required],
+      categoryId: ['', Validators.required],
       stock: [0, [Validators.required, Validators.min(0)]],
       price: [0, [Validators.required, Validators.min(1)]],
-      imgUrl: ['', [Validators.required, Validators.minLength(2)]],
+      productImgUrl: ['', [Validators.required, Validators.minLength(2)]],
     });
   }
 
   onSubmit(){
     if(this.productForm.valid){
-      const newProduct: addProduct = this.productForm.value;
-      console.log('✅ Product added:', newProduct);
-      this.productService.addProduct(newProduct).subscribe({
+      // const newProduct: addProduct = this.productForm.value;
+      const formValue = this.productForm.value;
+
+      const newProduct: addProduct = {
+        name: formValue.name,
+        description: formValue.description,
+        price: formValue.price,
+        sku: formValue.sku,
+        stock: formValue.stock,
+        categoryId: formValue.category,
+        productImgUrl: formValue.imgUrl
+      };
+
+
+      console.log('✅ Product added:', this.productForm.value);
+      this.productService.addProduct(this.productForm.value).subscribe({
         next: (response) => {
           console.log('✅ Product added successfully:', response);
         },
