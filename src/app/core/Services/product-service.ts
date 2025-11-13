@@ -4,6 +4,9 @@ import { Observable } from 'rxjs';
 import { ProductModel } from './models/product.interface';
 import { categoryModel } from './models/Category.interface';
 import addProduct from './models/addProduct.interface';
+import { addCategory } from './models/addCategory/addCategory';
+import { editProduct } from './models/ProductModels/editProduct.interface';
+import { ProductDataModel } from './models/ProductModels/ProductModel.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +23,15 @@ export class ProductService {
     const url="https://localhost:7125/api/Products/GetProducts"
     return this.http.get<ProductModel[]>(url)
   }
+  getProductById(id:number):Observable<ProductDataModel>{
+    const url=`https://localhost:7125/api/Products/GetProductById/${id}`
+    return this.http.get<ProductDataModel>(url)
+  }
 
+  editProduct(editproduct:editProduct):Observable<editProduct>{
+    const url="https://localhost:7125/api/Products/UpdateProduct"
+    return this.http.put<editProduct>(url,editproduct)
+  }
 
   addProduct(product:addProduct):Observable<addProduct>{
     const url="https://localhost:7125/api/Products/AddProduct"
@@ -31,5 +42,8 @@ export class ProductService {
     const url="https://localhost:7125/api/Categories";
     return this.http.get<categoryModel[]>(url)
   }
-
+  addCategory(category:addCategory):Observable<addCategory>{
+    const url="https://localhost:7125/api/Categories";
+    return this.http.post<addCategory>(url,category)
+  }
 }

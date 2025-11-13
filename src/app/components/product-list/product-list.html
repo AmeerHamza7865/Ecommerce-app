@@ -2,17 +2,23 @@
   <div class="flex justify-between">
     <h2 class="text-2xl font-semibold mb-6 text-gray-800">Products</h2>
     <a class="text-blue-500" routerLink="addproduct">Add Products</a>
-
   </div>
 
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
     <div
       *ngFor="let product of productList()"
-      class="bg-white rounded-2xl shadow-sm hover:shadow-md transition p-4 flex flex-col"
+      class="bg-white rounded-2xl shadow-sm hover:shadow-md transition p-4 flex flex-col relative"
     >
+      <!-- Edit button top-left -->
+      <a
+        class="absolute top-2 left-2 bg-indigo-600 text-white text-xs font-medium py-1 px-2 rounded hover:bg-indigo-500 transition"
+        [routerLink]="['/editproduct', product.id]"
+      >
+        Edit
+      </a>
+
       <img
-        *ngIf="product.imageUrls && product.imageUrls.length"
-        [src]="product.imageUrls[0]"
+        [src]="product.imageUrls"
         [alt]="product.name"
         class="rounded-xl mb-4 h-48 w-full object-cover"
       />
@@ -29,11 +35,14 @@
         <p class="text-xs text-gray-400">Stock: {{ product.stock }}</p>
       </div>
 
-      <button
-        class="mt-4 bg-indigo-600 text-white text-sm font-medium py-2 px-4 rounded-lg hover:bg-indigo-500 transition"
-      >
-        Add to Cart
-      </button>
+      <!-- Optional Add to Cart button -->
+      <div class="mt-4" *ngIf="!isAdmin">
+        <button
+          class="bg-indigo-600 text-white text-sm font-medium py-2 px-4 rounded-lg hover:bg-indigo-500 transition"
+        >
+          Add to Cart
+        </button>
+      </div>
     </div>
   </div>
 </div>

@@ -1,0 +1,117 @@
+<div class="max-w-2xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+  <h2 class="text-2xl font-bold mb-6 text-center">Edit Product</h2>
+
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <!-- Product Name -->
+    <div class="mb-4">
+      <label for="name" class="block text-gray-700 font-semibold mb-2">
+        Product Name
+      </label>
+      <input
+        id="name"
+        type="text"
+        formControlName="name"
+        placeholder="Enter product name"
+        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      />
+    </div>
+
+    <!-- SKU -->
+    <div class="mb-4">
+      <label for="sku" class="block text-gray-700 font-semibold mb-2">SKU</label>
+      <input
+        id="sku"
+        type="text"
+        formControlName="sku"
+        placeholder="Enter SKU"
+        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      />
+    </div>
+
+    <!-- Description -->
+    <div class="mb-4">
+      <label for="description" class="block text-gray-700 font-semibold mb-2">
+        Description
+      </label>
+      <textarea
+        id="description"
+        formControlName="description"
+        rows="3"
+        placeholder="Enter description"
+        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      ></textarea>
+    </div>
+
+    <!-- Category -->
+    <div class="mb-4">
+      <label for="categoryId" class="block text-gray-700 font-semibold mb-2">
+        Category
+      </label>
+      <select
+        id="categoryId"
+        formControlName="categoryId"
+        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      >
+        <option value="">Select Category</option>
+        <option
+          *ngFor="let category of productCategories()"
+          [value]="category.id"
+        >
+          {{ category.name }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Stock -->
+    <div class="mb-4">
+      <label for="stock" class="block text-gray-700 font-semibold mb-2">
+        Stock
+      </label>
+      <input
+        id="stock"
+        type="number"
+        formControlName="stock"
+        placeholder="Enter stock quantity"
+        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      />
+    </div>
+
+    <!-- Price -->
+    <div class="mb-4">
+      <label for="price" class="block text-gray-700 font-semibold mb-2">
+        Price
+      </label>
+      <input
+        id="price"
+        type="number"
+        step="0.01"
+        formControlName="price"
+        placeholder="Enter price"
+        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      />
+    </div>
+
+    <!-- Product Image URL -->
+    <div class="mb-6">
+      <label for="productImgUrl" class="block text-gray-700 font-semibold mb-2">
+        Product Image URL
+      </label>
+      <input
+        id="productImgUrl"
+        type="text"
+        formControlName="productImgUrl"
+        placeholder="Enter image URL"
+        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      />
+    </div>
+
+    <!-- Submit Button -->
+    <button
+      type="submit"
+      [disabled]="editForm.invalid"
+      class="w-full bg-indigo-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-indigo-700 transition"
+    >
+      Update Product
+    </button>
+  </form>
+</div>

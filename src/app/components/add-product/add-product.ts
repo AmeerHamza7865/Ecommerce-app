@@ -5,6 +5,7 @@ import { ProductModel } from '../../core/Services/models/product.interface';
 import { ProductService } from '../../core/Services/product-service';
 import { categoryModel } from '../../core/Services/models/Category.interface';
 import addProduct from '../../core/Services/models/addProduct.interface';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class AddProduct {
     productCategories = signal<categoryModel[]>([]);
 
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private router:Router) {
     // ✅ Initialize the reactive form properly
     //    this.productForm = this.fb.nonNullable.group({
     //   name: ['', [Validators.required, Validators.minLength(2)]],
@@ -62,6 +63,7 @@ export class AddProduct {
       this.productService.addProduct(this.productForm.value).subscribe({
         next: (response) => {
           console.log('✅ Product added successfully:', response);
+          this.router.navigate(['/']); // Navigate to home or another page after successful addition
         },
         error: (error) => {
           console.error('❌ Error adding product:', error);

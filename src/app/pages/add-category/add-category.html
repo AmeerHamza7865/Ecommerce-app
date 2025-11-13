@@ -1,0 +1,34 @@
+<form (ngSubmit)="addCategory(categoryForm.value)" #categoryForm="ngForm">
+  <div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold mb-6 text-center">Add New Category</h2>
+    <div class="mb-4">
+      <label for="name" class="block text-gray-700 font-semibold mb-2">Category Name</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        ngModel
+        required
+        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      />
+    </div>
+    <div class="mb-6">
+      <label for="slug" class="block text-gray-700 font-semibold mb-2">Category Slug</label>
+      <input
+        type="text"
+        id="slug"
+        name="slug"
+        ngModel
+        required
+        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      />
+    </div>
+    <button
+      type="submit"
+      [disabled]="categoryForm.invalid"
+      class="w-full bg-indigo-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-indigo-700 transition"
+    >
+      Add Category
+    </button>
+  </div>
+</form>
