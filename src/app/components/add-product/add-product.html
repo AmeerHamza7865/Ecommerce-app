@@ -1,132 +1,179 @@
-<!-- <p>Add product</p> -->
-<!-- <form (ngSubmit)="addProduct()" #productForm="ngForm" class="flex flex-col gap-4 w-1/2">
-  <input
-    type="text"
-    name="name"
-    [(ngModel)]="product.name"
-    placeholder="Product Name"
-    required
-    class="border p-2"
-  />
-  <input
-    type="number"
-    name="price"
-    [(ngModel)]="product.price"
-    placeholder="Product Price"
-    required
-    class="border p-2"
-  />
-  <textarea
-    name="description"
-    [(ngModel)]="product.description"
-    placeholder="Product Description"
-    required
-    class="border p-2"
-  ></textarea>
-  <button type="submit" [disabled]="!productForm.form.valid" class="bg-blue-500 text-white p-2">
-    Add Product
-  </button> -->
+<!-- <div class="max-w-lg mx-auto mt-10 bg-white p-6 rounded-2xl shadow-md">
+  <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Add New Product</h2>
 
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="space-y-4">
+    
 
-<p>Add product</p>
-
-<form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 w-1/2">
-
-  <input
-    type="text"
-    formControlName="name"
-    placeholder="Product Name"
-    class="border p-2"
-  />
-  <div class="text-red-600 text-sm" *ngIf="name?.touched && name?.invalid">
-    <span *ngIf="name?.errors?.['required']">Name is required.</span>
-    <span *ngIf="name?.errors?.['maxlength']">Max 100 characters.</span>
-  </div>
-
-  <input
-    type="number"
-    formControlName="price"
-    placeholder="Product Price"
-    class="border p-2"
-    step="0.01"
-    min="0"
-  />
-  <div class="text-red-600 text-sm" *ngIf="price?.touched && price?.invalid">
-    <span *ngIf="price?.errors?.['required']">Price is required.</span>
-    <span *ngIf="price?.errors?.['min']">Price must be greater than 0.</span>
-  </div>
-  <input
-    type="number"
-    formControlName="stock"
-    placeholder="Product Stock"
-    class="border p-2"
-    step="0.01"
-    min="0"
-  />
-  <div class="text-red-600 text-sm" *ngIf="stock?.touched && stock?.invalid">
-    <span *ngIf="stock?.errors?.['required']">Stock is required.</span>
-    <span *ngIf="stock?.errors?.['min']">Stock must be greater than 0.</span>
-  </div>
-
-  <input
-    type="text"
-    formControlName="sku"
-    placeholder="Product SKU"
-    class="border p-2"
-  />
-  <div class="text-red-600 text-sm" *ngIf="sku?.touched && sku?.invalid">
-    <span *ngIf="sku?.errors?.['required']">SKU is required.</span>
-    <span *ngIf="sku?.errors?.['maxlength']">Max 100 characters.</span>
-  </div>
-
-    <!-- <input
-        type="text"
-        formControlName="category"
-        placeholder="Product Category"
-        class="border p-2"
-      /> -->
-
-      <select formControlName="category" class="border p-2">
-        <option value="" disabled selected>Select Category</option>
-        <option value="1">Mobile</option>
-        <option value="2">Apple Watchs</option>
-        </select>
-        <!-- <option value="Books">Books</option>
-        <option value="Home">Home</option>
-        <option value="Sports">Sports</option> -->
-
-      <div class="text-red-600 text-sm" *ngIf="category?.touched && category?.invalid">
-        <span *ngIf="category?.errors?.['required']">Category is required.</span>
-        <span *ngIf="category?.errors?.['maxlength']">Max 100 characters.</span>
-      </div>    
-
+    <div>
+      <label class="block text-gray-700 font-medium mb-2">Product Name</label>
       <input
+        formControlName="name"
         type="text"
-        formControlName="image"
-        placeholder="Product Image URL"
-        class="border p-2"
+        placeholder="Enter product name"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none"
       />
-
-      
-      <div class="text-red-600 text-sm" *ngIf="image?.touched && image?.invalid">
-        <span *ngIf="image?.errors?.['required']">Image URL is required.</span>
+      <div *ngIf="productForm.get('name')?.touched && productForm.get('name')?.invalid" class="text-red-500 text-sm mt-1">
+        Product name is required (min 2 chars)
       </div>
+    </div>
+    <div>
+      <label class="block text-gray-700 font-medium mb-2">Description</label>
+     
 
-  <textarea
-    formControlName="description"
-    placeholder="Product Description"
-    class="border p-2"
-  ></textarea>
-  <div class="text-red-600 text-sm" *ngIf="description?.touched && description?.invalid">
-    <span *ngIf="description?.errors?.['required']">Description is required.</span>
-    <span *ngIf="description?.errors?.['maxlength']">Max 1000 characters.</span>
-  </div>
+      <textarea formControlName="description" placeholder="Enter product Description" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none"></textarea>
+     
+    </div>
 
-  <button
-    type="submit"
-    [disabled]="productForm.invalid || productForm.pristine"
-    class="bg-blue-500 text-white p-2 disabled:opacity-50"
-  >
-    Add Product
-  </button>
-</form>
+
+    <div>
+      <label class="block text-gray-700 font-medium mb-2">Category</label>
+      <select
+        formControlName="category"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none"
+      >
+        <option value="">Select category</option>
+        @for(item of productCategories();track $index){
+
+            <option value="{{item.id}}">{{item.name}}</option>
+        }
+       
+      </select>
+      <div *ngIf="productForm.get('category')?.touched && productForm.get('category')?.invalid" class="text-red-500 text-sm mt-1">
+        Category is required
+      </div>
+    </div>
+
+
+    <div>
+      <label class="block text-gray-700 font-medium mb-2">Stock Quantity</label>
+      <input
+        formControlName="stock"
+        type="number"
+        placeholder="Enter stock"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none"
+      />
+      <div *ngIf="productForm.get('stock')?.touched && productForm.get('stock')?.invalid" class="text-red-500 text-sm mt-1">
+        Stock must be 0 or higher
+      </div>
+    </div>
+
+ 
+    <div>
+      <label class="block text-gray-700 font-medium mb-2">Price ($)</label>
+      <input
+        formControlName="price"
+        type="number"
+        placeholder="Enter price"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none"
+      />
+      <div *ngIf="productForm.get('price')?.touched && productForm.get('price')?.invalid" class="text-red-500 text-sm mt-1">
+        Price must be greater than 0
+      </div>
+    </div>
+
+ 
+    <button
+      type="submit"
+      class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+    >
+      Add Product
+    </button>
+  </form>
+</div>
+ -->
+
+
+
+ <div class="max-w-lg mx-auto mt-10 bg-white p-6 rounded-2xl shadow-md">
+  <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Add New Product</h2>
+
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="space-y-4">
+
+    <!-- Product Name -->
+    <div>
+      <label class="block text-gray-700 font-medium mb-2">Product Name</label>
+      <input
+        formControlName="name"
+        type="text"
+        placeholder="Enter product name"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none"
+      />
+      <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched"
+           class="text-red-500 text-sm mt-1">
+        Product name is required (min 2 chars)
+      </div>
+    </div>
+
+    <!-- Category -->
+    <div>
+      <label class="block text-gray-700 font-medium mb-2">Category</label>
+      <select
+        formControlName="category"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none"
+      >
+        <option value="">Select category</option>
+        @for(item of productCategories(); track item.id) {
+          <option [value]="item.id">{{ item.name }}</option>
+        }
+      </select>
+      <div *ngIf="productForm.get('category')?.invalid && productForm.get('category')?.touched"
+           class="text-red-500 text-sm mt-1">
+        Category is required
+      </div>
+    </div>
+
+    <!-- Stock -->
+    <div>
+      <label class="block text-gray-700 font-medium mb-2">Stock Quantity</label>
+      <input
+        formControlName="stock"
+        type="number"
+        placeholder="Enter stock"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none"
+      />
+      <div *ngIf="productForm.get('stock')?.invalid && productForm.get('stock')?.touched"
+           class="text-red-500 text-sm mt-1">
+        Stock must be 0 or higher
+      </div>
+    </div>
+
+    <!-- Price -->
+    <div>
+      <label class="block text-gray-700 font-medium mb-2">Price ($)</label>
+      <input
+        formControlName="price"
+        type="number"
+        placeholder="Enter price"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none"
+      />
+      <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched"
+           class="text-red-500 text-sm mt-1">
+        Price must be greater than 0
+      </div>
+    </div>
+
+    <!-- Image -->
+    <div>
+      <label class="block text-gray-700 font-medium mb-2">Image URL</label>
+      <input
+        formControlName="imgUrl"
+        type="text"
+        placeholder="Enter image URL"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none"
+      />
+      <div *ngIf="productForm.get('imgUrl')?.invalid && productForm.get('imgUrl')?.touched"
+           class="text-red-500 text-sm mt-1">
+        Image URL is required
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <button
+      type="submit"
+      [disabled]="productForm.invalid"
+      class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+    >
+      Add Product
+    </button>
+  </form>
+</div>
