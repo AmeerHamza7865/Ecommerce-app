@@ -1,5 +1,20 @@
 <!-- <h1 class="text-3xl">Product List</h1> -->
 
+    <app-hero
+    [title]="'Limited Edition Sneakers'"
+  [subtitle]="'Just Dropped: The Future of Footwear'"
+  [description]="'Experience unmatched comfort and style with our latest collection. Made from sustainable materials with innovative technology.'"
+  [imageUrl]="'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80'"
+  [buttons]="[
+    { text: 'Shop Collection', link: '/sneakers', variant: 'primary' },
+    { text: 'View Details', link: '/product/limited-sneakers', variant: 'outline' }
+  ]"
+  [promo]="{ text: 'Limited Stock', badge: 'HOT' }"
+  [textAlign]="'center'"
+  [height]="'800px'"
+    
+    ></app-hero>
+
 <app-product-list></app-product-list>
 
 

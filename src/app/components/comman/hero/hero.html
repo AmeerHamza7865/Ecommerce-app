@@ -1,0 +1,101 @@
+<section 
+  class="relative w-full overflow-hidden"
+  [style.height]="height"
+>
+  <!-- Background Image with Overlay -->
+  <div class="absolute inset-0 z-0">
+    <img 
+      [src]="imageUrl" 
+      alt="Hero Background" 
+      class="w-full h-full object-cover"
+    />
+    <div 
+      class="absolute inset-0 bg-black"
+      [style.opacity]="overlayOpacity / 100"
+    ></div>
+  </div>
+
+  <!-- Content Container -->
+  <div class="relative z-10 h-full flex items-center">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div 
+        class="max-w-2xl"
+        [class]="{
+          'mx-auto text-center': textAlign === 'center',
+          'ml-auto text-right': textAlign === 'right',
+          'text-left': textAlign === 'left'
+        }"
+      >
+        <!-- Promo Badge -->
+        @if (showPromo && promo) {
+          <div class="mb-6">
+            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white text-sm font-medium">
+              @if (promo.badge) {
+                <span class="px-2 py-1 bg-red-500 text-white text-xs font-bold rounded-full">
+                  {{ promo.badge }}
+                </span>
+              }
+              {{ promo.text }}
+            </span>
+          </div>
+        }
+
+        <!-- Title -->
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+          {{ title }}
+        </h1>
+
+        <!-- Subtitle -->
+        <h2 class="text-xl md:text-2xl text-gray-200 mb-6">
+          {{ subtitle }}
+        </h2>
+
+        <!-- Description -->
+        <p class="text-lg text-gray-300 mb-8 max-w-lg">
+          {{ description }}
+        </p>
+
+        <!-- Buttons -->
+        <div class="flex flex-wrap gap-4" [class]="{
+          'justify-center': textAlign === 'center',
+          'justify-end': textAlign === 'right'
+        }">
+          @for (button of buttons; track button.text) {
+            <a 
+              [href]="button.link"
+              [class]="getButtonClasses(button.variant)"
+              class="px-8 py-3 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2"
+            >
+              {{ button.text }}
+            </a>
+          }
+        </div>
+
+        <!-- Stats/Features -->
+        <div class="mt-12 grid grid-cols-2 md:grid-cols-3 gap-6">
+          <div class="text-center">
+            <div class="text-3xl font-bold text-white mb-2">50% OFF</div>
+            <div class="text-gray-300">Selected Items</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-bold text-white mb-2">Free</div>
+            <div class="text-gray-300">Shipping</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-bold text-white mb-2">24/7</div>
+            <div class="text-gray-300">Support</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+    <div class="animate-bounce">
+      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </div>
+  </div>
+</section>
