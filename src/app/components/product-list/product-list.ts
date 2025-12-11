@@ -23,9 +23,9 @@ export class ProductList {
   }
   getProduct(){
     this.ProductData.getAllProducts().subscribe((data:ProductModel[])=>{
-      console.log(data)
+      // console.log(data)
       this.productList.set(data)
-       console.log("product-list",this.productList)
+      //  console.log("product-list",this.productList)
     })
   }
 }

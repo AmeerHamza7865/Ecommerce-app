@@ -8,33 +8,42 @@ import { EditProduct } from './components/edit-product/edit-product/edit-product
 import { LoginForm } from './pages/Auth/login-form/login-form';
 import { SignupForm } from './pages/Auth/signup-form/signup-form';
 import { ProductDetails } from './components/product-details/product-details/product-details';
+import { AuthGuard } from './auth.guard';
 
 export const routes: Routes = [
     {
-        path:"",component:Home
+        path: "", component: Home,
+        canActivate: [AuthGuard]
     },
     {
-        path:"about",component:About
+        path: "about", component: About
     },
     {
-        path:"contact",component:Contact
+        path: "contact", component: Contact
     },
     {
-        path:"addproduct",component:AddProduct
+        path: "addproduct", component: AddProduct,
+        canActivate: [AuthGuard]
     },
     {
-        path:"editproduct/:id",component:EditProduct
+        path: "editproduct/:id", component: EditProduct,
+        canActivate: [AuthGuard]
     },
     {
-        path:"productDetails/:id",component:ProductDetails
+        path: "productDetails/:id", component: ProductDetails
     },
     {
-        path:"addcategory",component:AddCategory
+        path: "addcategory", component: AddCategory
     },
     {
-        path:"login",component:LoginForm
+        path: "login", component: LoginForm
     },
     {
-        path:"signup",component:SignupForm
+        path: "signup", component: SignupForm
     },
+    {
+        path: "test",
+        component: AddProduct,
+        canActivate: [AuthGuard]
+    }
 ];

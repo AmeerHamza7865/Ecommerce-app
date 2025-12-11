@@ -9,6 +9,25 @@ import { SignupModel } from '../models/AuthModel/signupModel';
 })
 export class AuthService {
   
+  // private token:string|null=null;
+
+   setToken(token:string){
+    // this.token=token;
+    localStorage.setItem('token',token);
+  }
+  getToken():string|null{
+    // return this.token;
+    return localStorage.getItem('token');
+  }
+    clearToken() {
+    // this.token = null;
+    localStorage.removeItem('token');
+  }
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem("token");
+  }
+
+
   constructor(private http:HttpClient) { }
 
   loginService(loginData: LoginModel):Observable<LoginModel>{
