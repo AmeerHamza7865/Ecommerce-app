@@ -1,4 +1,19 @@
-<div class="flex justify-between ">
+<!-- <h1 class="text-3xl">Product List</h1> -->
+
+    <app-hero
+    [title]="'Limited Time 50% Off on New Order'"
+  [subtitle]="'Just Dropped: The Future of Footwear'"
+  [description]="'Experience unmatched comfort and style with our latest collection. Made from sustainable materials with innovative technology.'"
+  [imageUrl]="'/images/banners.png'"
+  [buttons]="[
+    { text: 'Order Now', link: '/sneakers', variant: 'primary' },
+    { text: 'View Details', link: '/product/limited-sneakers', variant: 'outline' }
+  ]"
+  [promo]="{ text: 'Limited Stock', badge: 'HOT' }"
+  [textAlign]="'center'"
+  [height]="'800px'"
+    
+    ></app-hero>
 
     <h1 class="text-xl">Product List</h1>
     <button class="text-xl px-3 py-2 bg-blue-500">Add Products</button>

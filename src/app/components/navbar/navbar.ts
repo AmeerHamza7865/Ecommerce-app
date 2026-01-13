@@ -1,14 +1,17 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { Component, Input } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink,RouterLinkActive,NgIf,NgFor],
+  imports: [RouterLink,RouterLinkActive,CommonModule],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css'
 })
 export class Navbar {
+
+  @Input() isAdminDashboard: boolean = false;
+
  open = false;
 
   toggle() {
