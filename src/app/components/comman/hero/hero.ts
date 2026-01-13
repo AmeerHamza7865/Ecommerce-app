@@ -23,7 +23,8 @@ export class Hero {
   @Input() title: string = 'Summer Collection 2024';
   @Input() subtitle: string = 'Discover the latest trends in fashion with our exclusive collection';
   @Input() description: string = 'Up to 50% off on selected items. Limited time offer. Free shipping on orders over $50.';
-  @Input() imageUrl: string = 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80';
+  // @Input() imageUrl: string = 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80';
+  @Input() imageUrl: string = 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80';
   @Input() buttons: HeroButton[] = [
     { text: 'Shop Now', link: '/shop', variant: 'primary' },
     { text: 'Learn More', link: '/about', variant: 'secondary' }

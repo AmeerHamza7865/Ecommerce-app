@@ -46,7 +46,7 @@ onSubmit() {
       this.isError.set(false);
      
       // Navigate after success
-      this.router.navigate(['/']);
+      this.router.navigate(['/home']);
     },
     error: (error) => {
       // console.error('Login failed', error);
